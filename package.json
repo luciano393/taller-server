@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "API server and authentication JWT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luciano IB",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
