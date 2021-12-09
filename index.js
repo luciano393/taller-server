@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const router = require('./routes/index');
 const ImageKit = require("imagekit");
-const port = 3001;
 
 dotenv.config()
+const {PORT, DATABASE, DATABASE_TEST } = process.env;
 
 const app = express();
 app.use(cors());
@@ -23,8 +23,12 @@ app.use('auth', authenticationParameters)
 
 
 // Conectar con MongoDB
+const connectionString = NODE_ENV === 'test'
+    ? DATABASE_TEST
+    : DATABASE
+
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, () => console.log("Data base connected"))
@@ -38,6 +42,6 @@ app.use(express.urlencoded({
 // Habilitar Routing
 app.use('/API', router())
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`)
 })
